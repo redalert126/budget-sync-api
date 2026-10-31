@@ -1,0 +1,23 @@
+{
+  "name": "budget-sync-api",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Personal finance backend: bank transaction sync via Plaid, budgets, and categorization. Node/Express/Postgres/Redis.",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "node --env-file-if-exists=.env --import ./src/instrument.js --watch src/server.js",
+    "start": "node --import ./src/instrument.js src/server.js",
+    "worker": "node --import ./src/instrument.js src/worker.js",
+    "worker:dev": "node --env-file-if-exists=.env --import ./src/instrument.js --watch src/worker.js",
+    "migrate": "node-pg-migrate -m migrations -j sql",
+    "migrate:up": "npm run migrate -- up",
+    "migrate:down": "npm run migrate -- down",
+    "migrate:create": "npm run migrate -- create",
+    "create-user": "node --env-file-if-exists=.env scripts/create-user.js",
+    "test": "node --env-file-if-exists=.env.test --test --test-concurrency=1 \"test/**/*.test.js\"",
+    "lint": "eslint ."
+  }
+}
